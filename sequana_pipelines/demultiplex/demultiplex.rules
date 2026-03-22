@@ -97,16 +97,19 @@ if config["general"]["mode"] == "bcl2fastq":
             "Stats/Stats.json",
         params:
             indir= config["general"]["input_directory"],
+            outdir= ".",
             barcode_mismatch=config['bcl2fastq']['barcode_mismatch'],
             ignore_missing_bcls=config['bcl2fastq']['ignore_missing_bcls'],
             no_bgzf_compression=config['bcl2fastq']['no_bgzf_compression'],
             merge_all_lanes=config['bcl2fastq']['merge_all_lanes'],
             options=config['bcl2fastq']['options']
+        log:
+            "bcl2fastq/bcl2fastq.log"
         threads: config['bcl2fastq']['threads']
         resources:
            **config['bcl2fastq']['resources']
-        wrapper:
-            manager.get_shell("bcl2fastq", "v1")
+        shell:
+            manager.get_shell("bcl2fastq/run", "v1")
 
 elif config["general"]["mode"] == "cellranger_atac":
 
@@ -217,8 +220,8 @@ rule multiqc:
         **config["multiqc"]["resources"]
     container:
         config["apptainers"]["multiqc"]
-    wrapper:
-        manager.get_shell("multiqc", "v1")
+    shell:
+        manager.get_shell("multiqc/run", "v1")
 
 
 
