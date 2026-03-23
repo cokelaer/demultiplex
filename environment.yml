@@ -1,0 +1,6 @@
+name: demultiplex
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pip
