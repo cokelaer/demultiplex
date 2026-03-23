@@ -273,22 +273,23 @@ onsuccess:
 
 
     intro = """<div>
-<p style="text-align:justify">This report summarizes the demultiplexing of your raw data. Some additional help to interpret the following plots can be found on the pipeline <a href="https://github.com/sequana/sequana_demultiplex">home page</a> and  <a href="https://github.com/sequana/sequana_demultiplex/wiki"> wiki</a>.</p>
+<p style="text-align:justify">This report summarizes the demultiplexing of your raw data. Some additional help to interpret the following plots can be found on the pipeline <a href="https://github.com/sequana/sequana_demultiplex">home page</a> and <a href="https://github.com/sequana/sequana_demultiplex/wiki">wiki</a>.</p>
 
-<br>
 <hr>
-<br>
 
-<p style="text-align:justify">The following image shows the indices found in the most Undetermined barcodes per lane. An index in excess may indicate a wrong SampleSheet with a potential typo error or simply a missing sample/index. 
-The 20 most represented undetermined barcodes are available <a href="undetermined_barcodes_20.csv">here</a>. A full list of all undetermined indices is also downloaded <a href="undetermined_barcodes.csv">here</a> as a CSV file. The vertical dashed red line indicates the median of the number of reads found in the determined samples. If the bars are well below this vertical line, you data is probably well demultiplexed.</p> 
-<br><br>{} <hr> 
-<p style="text-align:justify">
-The following image shows the ratio of determined/undetermined reads after demultiplexing. Again, an excess of undetermined (larger than 10-20%) may indicate a wrongly labelled sample in your sample sheet.
-</p>  <br><br>{}<hr> 
-<p style="text-align:justify">
-The following image is similar. Instead of showing the index, we show here the number of reads per sample.</p>
+<p style="text-align:justify">The following image shows the indices found in the most undetermined barcodes per lane. An index in excess may indicate a wrong sample sheet with a potential typo or simply a missing sample/index.
+The 20 most represented undetermined barcodes are available <a href="undetermined_barcodes_20.csv">here</a>. A full list of all undetermined indices is also available <a href="undetermined_barcodes.csv">here</a> as a CSV file. The vertical dashed red line indicates the median number of reads found in the determined samples. If the bars are well below this line, your data is probably well demultiplexed.</p>
 <br>{}
 
+<hr>
+
+<p style="text-align:justify">The following image shows the ratio of determined vs. undetermined reads after demultiplexing. An excess of undetermined reads (more than 10-20%) may indicate a wrongly labelled sample in your sample sheet.</p>
+<br>{}
+
+<hr>
+
+<p style="text-align:justify">The following image shows the number of reads per sample.</p>
+<br>{}
 
 </div>""".format(image1, image2, image3)
 

@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "sequana-demultiplex"
-version = "1.5.2"
+version = "1.5.3"
 description = "Pipeline that runs bcl2fastq and ease demultiplexing of Sequencing data"
 authors = ["Sequana Team"]
 license = "BSD-3"
@@ -22,6 +22,7 @@ classifiers = [
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Scientific/Engineering :: Bio-Informatics",
         "Topic :: Scientific/Engineering :: Information Analysis",
@@ -35,8 +36,9 @@ packages = [
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
 sequana = ">=0.15.0"
-sequana_pipetools = ">=0.16.1"
-click-completion = "^0.5.2"
+sequana_pipetools = ">=1.1.0"
+sequana-wrappers = ">=26.3.0"
+click-completion = ">=0.5.2"
 
 
 [tool.poetry.scripts]
