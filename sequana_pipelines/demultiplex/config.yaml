@@ -12,8 +12,6 @@
 #
 ##############################################################################
 
-sequana_wrappers: "v23.11.18"
-
 #################################################################
 # general
 #
@@ -55,6 +53,24 @@ bcl2fastq:
     resources:
         mem: 64G
 
+###################################################################################
+# bclconvert
+#
+#
+# barcode_mismatch:  is not available anymore and should be in the SampleSheet.
+# strict_mode should be false (default) to ignore missing bcls (same behaviour as in
+# bcl2fastq section with the ignore_missing_bcls that is True by default
+# to keep same behaviour as bcl2fastq, we set bcl_sampleproject_subdirectories: true
+# 
+bclconvert:
+    threads: 4
+    strict_mode: false
+    no_bgzf_compression: true
+    merge_all_lanes: true
+    bcl_sampleproject_subdirectories: true
+    options: ''
+    resources:
+        mem: 64G
 
 ###################################################################################
 # cellranger_atac

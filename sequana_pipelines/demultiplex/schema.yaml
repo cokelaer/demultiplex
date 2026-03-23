@@ -3,9 +3,6 @@
 
 type: map
 mapping:
-    "sequana_wrappers":
-        type: str
-
     "general":
         type: map
         mapping:
@@ -27,7 +24,7 @@ mapping:
         mapping:
             "threads":
                 type: int
-            "barcode_mismatch": 
+            "barcode_mismatch":
                 type: int
             "ignore_missing_controls":
                 type: bool
@@ -36,11 +33,32 @@ mapping:
             "no_bgzf_compression":
                 type: bool
             "options":
-                type: str 
+                type: str
             "merge_all_lanes":
                 type: bool
             "write_fastq_reverse_complement":
                 type: bool
+            "strict_mode":
+                type: bool
+            "resources":
+                type: any
+                required: true
+
+    "bclconvert":
+        type: map
+        mapping:
+            "threads":
+                type: int
+            "strict_mode":
+                type: bool
+            "no_bgzf_compression":
+                type: bool
+            "merge_all_lanes":
+                type: bool
+            "bcl_sampleproject_subdirectories":
+                type: bool
+            "options":
+                type: str
             "resources":
                 type: any
                 required: true

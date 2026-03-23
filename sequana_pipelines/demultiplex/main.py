@@ -22,6 +22,7 @@ NAME = "demultiplex"
 
 from sequana_pipetools import SequanaManager
 from sequana_pipetools.options import *
+from sequana.iem import IEM
 
 help = init_click(
     NAME,
@@ -80,7 +81,17 @@ help = init_click(
     help="""In bcl2fastq, the option --ignore-missing-bcls implies that
 we assume 'N'/'#' for missing calls. In Sequana_demultiplex, we use that option
 by default. If you do not want that behviour, but the one from bcl2fastq, use
-this flag(--no-ignore-missing-bcls)""",
+this flag(--no-ignore-missing-bcls). """,
+)
+@click.option(
+    "--strict-mode",
+    "strict_mode",
+    is_flag=True,
+    default=False,
+    show_default=True,
+    help="""In bclconvert, the option --strict-mode implies that
+corrupted bcls are ignored and replaced with N with a quality score of 2 (#)
+equivalent as ignore_missing_bcls set to True with bcl2fastq""",
 )
 @click.option(
     "--bgzf-compression",
@@ -89,14 +100,14 @@ this flag(--no-ignore-missing-bcls)""",
     show_default=False,
     help="""turn on BGZF compression for FASTQ files. By default,
 bcl2fastq uses this option; By default we don't. Set --bgzl--compression flag to
-set it back""",
+set it back. For bcl2fastq only.""",
 )
 @click.option(
     "--mars-seq",
     default=False,
     is_flag=True,
     show_default=True,
-    help="""Set options to--minimum-trimmed-read-length 15 --mask-short-adapter-reads 15
+    help="""Set options to --minimum-trimmed-read-length 15 --mask-short-adapter-reads 15
 and do not merge lanes""",
 )
 @click.option(
@@ -163,6 +174,12 @@ def main(**options):
     # cfg.bcl2fastq.output_directory = "."
     cfg.bcl2fastq.ignore_missing_bcls = not options.no_ignore_missing_bcls
     cfg.bcl2fastq.no_bgzf_compression = not options.bgzf_compression
+    # this is part of the sample sheet requirements
+    #cfg.bcl2convert.barcode_mismatch = options.mismatch
+
+
+    cfg.bclconvert.threads = options.threads
+    cfg.bcl2fastq.strict_mode = not options.strict_mode
 
     if options.merging_strategy == "merge":
         cfg.bcl2fastq.merge_all_lanes = True
@@ -179,9 +196,10 @@ def main(**options):
     elif options.scatac_seq:
         cfg.cellranger_atac.options = ""
         cfg.general.mode = "cellranger_atac"
-    else:  # All other cases with bcl2fastq
-        from sequana.iem import IEM
+    #elif options.bclconvert:  # All other cases with bcl2fastq
+    #    cfg.general.mode = "bclconvert"
 
+    else:
         cfg.general.mode = "bcl2fastq"
         try:
             ss = IEM(cfg.general.samplesheet_file)
